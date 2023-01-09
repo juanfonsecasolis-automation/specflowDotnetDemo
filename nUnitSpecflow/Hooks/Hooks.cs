@@ -28,8 +28,7 @@ namespace nUnitSpecflow.Hooks
         [AfterScenario]
         public void Teardown()
         {
-            _myDriverManager.WebDriver.Close();
-            _myDriverManager.WebDriver.Quit();
+            _myDriverManager.Quit();
         }
     }
 }

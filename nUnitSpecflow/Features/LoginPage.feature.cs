@@ -77,6 +77,7 @@ namespace nUnitSpecflow.Features
         [NUnit.Framework.DescriptionAttribute("User is able to login using valid credentials")]
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("standard_user", "secret_sauce", null)]
+        [NUnit.Framework.TestCaseAttribute("standard_user", "wrong_password", null)]
         public void UserIsAbleToLoginUsingValidCredentials(string username, string password, string[] exampleTags)
         {
             string[] @__tags = new string[] {

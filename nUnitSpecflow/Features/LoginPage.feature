@@ -9,5 +9,6 @@ Scenario: User is able to login using valid credentials
 	Then the inventory page is displayed
 
 	Examples: 
-	| username      | password     |
-	| standard_user | secret_sauce |
+	| username      | password       |
+	| standard_user | secret_sauce   |
+	| standard_user | wrong_password |

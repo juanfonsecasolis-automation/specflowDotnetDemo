@@ -13,16 +13,21 @@ namespace nUnitSpecflow.Pages
     {
         By _usernameFieldLocator = By.XPath("//*[@data-test='username']");
         By _passwordFieldLocator = By.XPath("//*[@data-test='password']");
+        By _loginButtonLocator = By.XPath("//*[@data-test='login-button']");
 
         public LoginPage(MyDriverManager myDriverManager) : base(myDriverManager) { }
 
         public override void VerifyPageLoadedCorrectly()
         {
-            Assert.True(_myDriverManager.WebDriver.FindElement(_usernameFieldLocator).Displayed);
+            Assert.True(_myDriverManager.FindElement(_usernameFieldLocator).Displayed);
         }
 
-        internal void LogInWithUsernameAndPassword(string username, string password)
+        internal InventoryPage LogInWithUsernameAndPassword(string username, string password)
         {
+            _myDriverManager.FindElement(_usernameFieldLocator).SendKeys(username);
+            _myDriverManager.FindElement(_passwordFieldLocator).SendKeys(password);
+            _myDriverManager.FindElement(_loginButtonLocator).Click();
+            return new InventoryPage(_myDriverManager); // TODO: handle bad login
         }
     }
 }

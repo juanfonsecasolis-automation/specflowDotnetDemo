@@ -22,7 +22,7 @@ namespace nUnitSpecflow.Steps
         [When(@"user logins with username ""([^""]*)"" and password ""([^""]*)""")]
         public void WhenUserLoginsWithUsernameAndPassword(string username, string password)
         {
-            ((LoginPage)_currentPage).LogInWithUsernameAndPassword(username, password);
+            _currentPage = ((LoginPage)_currentPage).LogInWithUsernameAndPassword(username, password);
         }
 
         [Then(@"the inventory page is displayed")]
