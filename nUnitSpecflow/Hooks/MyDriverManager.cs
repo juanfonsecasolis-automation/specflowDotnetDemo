@@ -1,14 +1,9 @@
-﻿using Microsoft.VisualStudio.TestPlatform.Utilities;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using nUnitSpecflow.DataAccess;
 using nUnitSpecflow.Factories;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace nUnitSpecflow.Hooks
@@ -19,15 +14,17 @@ namespace nUnitSpecflow.Hooks
         WebDriver _webDriver;
         string _snapshotsFolder;
 
-        public MyDriverManager() {
+        public MyDriverManager()
+        {
             WebBrowserType webBrowserType = (WebBrowserType)Enum.Parse(
-                typeof(WebBrowserType), 
-                TestContext.Parameters["webBrowser"]
+                typeof(WebBrowserType),
+                SettingsManager.WebBrowser
             );
             _webDriver = WebDriverFactory.GetDriver(webBrowserType);
             _webDriver.Url = TestContext.Parameters["webAppUrl"];
             _snapshotsFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\snapshots";
-            if (!Directory.Exists(_snapshotsFolder)) {
+            if (!Directory.Exists(_snapshotsFolder))
+            {
                 Directory.CreateDirectory(_snapshotsFolder);
             }
         }
@@ -38,10 +35,24 @@ namespace nUnitSpecflow.Hooks
             {
                 return _webDriver.FindElement(locator);
             }
-            catch(Exception e){
+            catch
+            {
                 CaptureSnapshot();
-                throw e;
-            }  
+                throw;
+            }
+        }
+
+        internal ReadOnlyCollection<IWebElement> FindElements(By locator)
+        {
+            try
+            {
+                return _webDriver.FindElements(locator);
+            }
+            catch
+            {
+                CaptureSnapshot();
+                throw;
+            }
         }
 
         internal void Quit()
@@ -53,7 +64,7 @@ namespace nUnitSpecflow.Hooks
         private void CaptureSnapshot()
         {
             ((ITakesScreenshot)_webDriver).GetScreenshot().SaveAsFile(
-                Path.Combine(_snapshotsFolder, $"{DateTime.Now.ToString("yyMMddmmss")}.png")    
+                Path.Combine(_snapshotsFolder, $"{DateTime.Now.ToString("yyMMddmmss")}.png")
             );
         }
     }

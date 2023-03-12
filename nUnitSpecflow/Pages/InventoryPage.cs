@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using nUnitSpecflow.Hooks;
 using OpenQA.Selenium;
+using WebDriverManager;
 
 namespace nUnitSpecflow.Pages
 {
@@ -12,7 +13,13 @@ namespace nUnitSpecflow.Pages
 
         public override void VerifyPageLoadedCorrectly()
         {
-            Assert.IsTrue(_myDriverManager.FindElement(_productsHeaderLocator).Displayed);
+            Assert.IsTrue(DriverManager.FindElement(_productsHeaderLocator).Displayed);
+        }
+
+        internal List<string> GetInventoryItems()
+        {
+            return this.DriverManager.FindElements(By.CssSelector(".inventory_item"))
+                .Select(x => x.Text).ToList<string>();
         }
     }
 }

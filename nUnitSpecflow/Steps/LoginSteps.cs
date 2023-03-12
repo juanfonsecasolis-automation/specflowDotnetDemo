@@ -16,13 +16,13 @@ namespace nUnitSpecflow.Steps
         [Given(@"user opens the login page")]
         public void GivenUserOpensTheLoginPage()
         {
-            _currentPage = new LoginPage(_myDriverManager);
+            CurrentPage = new LoginPage(DriverManager);
         }
 
         [When(@"user logins with username ""([^""]*)"" and password ""([^""]*)""")]
         public void WhenUserLoginsWithUsernameAndPassword(string username, string password)
         {
-            _currentPage = ((LoginPage)_currentPage).LogInWithUsernameAndPassword(username, password);
+            CurrentPage = ((LoginPage)CurrentPage).LoginAndGetInventoryPage(username, password);
         }
 
         [Then(@"the inventory page is displayed")]

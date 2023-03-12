@@ -1,4 +1,5 @@
-﻿using nUnitSpecflow.Hooks;
+﻿using nUnitSpecflow.DataAccess;
+using nUnitSpecflow.Hooks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -23,6 +24,9 @@ namespace nUnitSpecflow.Factories
             WebDriver webDriver;
             switch (webBrowserType) {
                 case WebBrowserType.Edge:
+                    var edgeOptions = new EdgeOptions();
+                    if(SettingsManager.HeadlessEnabled)
+                        edgeOptions.AddArgument("--headless");
                     new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
                     webDriver = new EdgeDriver();
                     break;

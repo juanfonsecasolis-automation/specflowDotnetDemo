@@ -11,4 +11,10 @@ Scenario: User is able to login using valid credentials
 	Examples: 
 	| username      | password       |
 	| standard_user | secret_sauce   |
-	| standard_user | wrong_password |
+
+@regression
+Scenario: The inventory page is arranged as expected
+	Given user opens the login page
+	When user logins with username "standard_user" and password "secret_sauce"
+	Then the inventory page is displayed
+	And only six items are rendered
