@@ -19,15 +19,15 @@ namespace nUnitSpecflow.Pages
 
         public override void VerifyPageLoadedCorrectly()
         {
-            Assert.True(DriverManager.FindElement(_usernameFieldLocator).Displayed);
+            Assert.True(MyDriverManager.FindElement(_usernameFieldLocator).Displayed);
         }
 
         internal InventoryPage LoginAndGetInventoryPage(string username, string password)
         {
-            DriverManager.FindElement(_usernameFieldLocator).SendKeys(username);
-            DriverManager.FindElement(_passwordFieldLocator).SendKeys(password);
-            DriverManager.FindElement(_loginButtonLocator).Click();
-            return new InventoryPage(DriverManager); // TODO: handle bad login
+            MyDriverManager.FindElement(_usernameFieldLocator).SendKeys(username);
+            MyDriverManager.FindElement(_passwordFieldLocator).SendKeys(password);
+            MyDriverManager.FindElement(_loginButtonLocator).Click();
+            return new InventoryPage(MyDriverManager); // TODO: handle bad login
         }
     }
 }

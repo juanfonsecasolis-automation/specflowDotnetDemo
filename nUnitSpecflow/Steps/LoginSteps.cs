@@ -16,7 +16,7 @@ namespace nUnitSpecflow.Steps
         [Given(@"user opens the login page")]
         public void GivenUserOpensTheLoginPage()
         {
-            CurrentPage = new LoginPage(DriverManager);
+            CurrentPage = new LoginPage(MyDriverManager);
         }
 
         [When(@"user logins with username ""([^""]*)"" and password ""([^""]*)""")]

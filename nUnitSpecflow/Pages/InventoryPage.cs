@@ -13,12 +13,12 @@ namespace nUnitSpecflow.Pages
 
         public override void VerifyPageLoadedCorrectly()
         {
-            Assert.IsTrue(DriverManager.FindElement(_productsHeaderLocator).Displayed);
+            MyDriverManager.AssertTrue(MyDriverManager.FindElement(_productsHeaderLocator).Displayed);
         }
 
         internal List<string> GetInventoryItems()
         {
-            return this.DriverManager.FindElements(By.CssSelector(".inventory_item"))
+            return this.MyDriverManager.FindElements(By.CssSelector(".inventory_item"))
                 .Select(x => x.Text).ToList<string>();
         }
     }

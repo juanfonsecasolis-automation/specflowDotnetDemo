@@ -12,11 +12,11 @@ namespace nUnitSpecflow.Steps
     [Binding]
     internal abstract class BaseSteps
     {
-        protected MyDriverManager DriverManager;
+        protected MyDriverManager MyDriverManager;
         protected BasePage CurrentPage;
 
         public BaseSteps(MyDriverManager myDriverManager) {
-            DriverManager = myDriverManager;
+            MyDriverManager = myDriverManager;
         }
     }
 }

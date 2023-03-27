@@ -9,11 +9,11 @@ namespace nUnitSpecflow.Pages
 {
     internal abstract class BasePage
     {
-        protected MyDriverManager DriverManager;
+        protected MyDriverManager MyDriverManager;
 
         public BasePage(MyDriverManager myDriverManager)
         {
-            DriverManager = myDriverManager;
+            MyDriverManager = myDriverManager;
             VerifyPageLoadedCorrectly();
         }
 
