@@ -13,7 +13,7 @@ namespace nUnitSpecflow.Steps
         [Then(@"only six items are rendered")]
         public void ThenOnlySixItemsAreRendered()
         {
-            MyDriverManager.AssertTrue(6==((InventoryPage)CurrentPage).GetInventoryItems().Count);
+            Assert.True(6==((InventoryPage)CurrentPage).GetInventoryItems().Count);
         }
 
     }

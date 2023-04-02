@@ -9,6 +9,8 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using NUnit.Framework;
+using AngleSharp.Html.Dom;
+using OpenQA.Selenium.Support.UI;
 
 namespace nUnitSpecflow.Hooks
 {
@@ -73,58 +75,17 @@ namespace nUnitSpecflow.Hooks
             _webDriver.Quit();
         }
 
+        internal void SelectElementFromDropdown(By filterDropdownLocator, string filterCriteria)
+        {
+            var dropdownElement = new SelectElement(_webDriver.FindElement(filterDropdownLocator));
+            dropdownElement.SelectByText(filterCriteria);
+        }
+
         private void CaptureSnapshot()
         {
             ((ITakesScreenshot)_webDriver).GetScreenshot().SaveAsFile(
                 Path.Combine(_snapshotsFolder, $"{DateTime.Now.ToString("yyMMddmmss")}.png")
             );
-        }
-
-        List<string> FindReportedTickets() 
-        {
-            List<string> ignoreTags = _scenarioContext.ScenarioInfo.Tags.Where(x => x.Contains("ignore")).ToList();
-            List<string> reportedTickets = new List<string>();
-            if (0<ignoreTags.Count)
-            {
-                var ticketRegex = new Regex("[0-9+]");
-                foreach (var ignoreTag in ignoreTags) 
-                {
-                    reportedTickets.AddRange(ticketRegex.Matches(ignoreTag).Select(x => x.Value));
-                    
-                } 
-            }
-            return reportedTickets;
-        }
-
-        public void AssertTrue(bool condition)
-        {
-            Assert(AssertionType.True, condition);
-        }
-
-        public void AssertFalse(bool condition)
-        {
-            Assert(AssertionType.False, condition);
-        }
-
-        void Assert(AssertionType assertionType, bool condition) 
-        {
-            List<string> reportedTickets = FindReportedTickets();
-            if (0 < reportedTickets.Count)
-            {
-                // TODO: optionally, if there is a connection to Azure DevOps you can make this fail
-                // after a period has elapsed (e.g. fail a TC after 30 days a ticket has been reported
-                // and not solved).
-                NUnit.Framework.Assert.Ignore($"A bug has been already reported on ticket(s): {string.Join(", ", reportedTickets)}");
-            }
-            else 
-            {
-                switch(assertionType)
-                {
-                    case AssertionType.True: NUnit.Framework.Assert.True(condition); break;
-                    case AssertionType.False: NUnit.Framework.Assert.False(condition); break;
-                    default: throw new NotImplementedException($"Assertion");
-                }
-            }
         }
     }
 }

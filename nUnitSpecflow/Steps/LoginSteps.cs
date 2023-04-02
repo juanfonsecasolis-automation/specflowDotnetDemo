@@ -25,5 +25,18 @@ namespace nUnitSpecflow.Steps
         {
         }
 
+        [When(@"user selects ""([^""]*)"" in the filter dropdown")]
+        public void WhenUserSelectsInTheFilterDropdown(string filterCriteria)
+        {
+            ((InventoryPage)CurrentPage).FilterBy(filterCriteria);
+        }
+
+        [Then(@"inventory items are ordered from low to high")]
+        public void ThenInventoryItemsAreOrderedFromLowToHigh()
+        {
+            throw new PendingStepException();
+        }
+
+
     }
 }
