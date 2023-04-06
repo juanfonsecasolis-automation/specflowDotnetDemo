@@ -22,9 +22,9 @@ namespace nUnitSpecflow.Factories
                 case WebBrowserType.Edge:
                     var edgeOptions = new EdgeOptions();
                     if (SettingsManager.HeadlessEnabled)
-                        edgeOptions.AddArgument("--headless");
+                        edgeOptions.AddArgument("headless");
                     new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
-                    webDriver = new EdgeDriver();
+                    webDriver = new EdgeDriver(edgeOptions);
                     break;
                 default:
                     throw new NotSupportedException();

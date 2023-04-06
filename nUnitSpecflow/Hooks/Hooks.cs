@@ -1,11 +1,9 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+
+[assembly: Parallelizable(ParallelScope.Fixtures)]
+[assembly: LevelOfParallelism(4)]
 
 namespace nUnitSpecflow.Hooks
 {
@@ -25,7 +23,7 @@ namespace nUnitSpecflow.Hooks
         public void Setup()
         {
             List<string> ignoreLabels = GetIgnoreTagLabels();
-            if (0 < ignoreLabels.Count) 
+            if (0 < ignoreLabels.Count)
             {
                 Assert.Ignore($"Ignoring per issue(s) reported on {string.Join(", ", ignoreLabels)}.");
             }
