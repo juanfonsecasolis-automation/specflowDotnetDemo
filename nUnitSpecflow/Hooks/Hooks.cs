@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Infrastructure;
 
 [assembly: Parallelizable(ParallelScope.Fixtures)]
 [assembly: LevelOfParallelism(4)]
@@ -12,8 +13,9 @@ namespace nUnitSpecflow.Hooks
     {
         private ScenarioContext _scenarioContext;
         private MyDriverManager _myDriverManager;
+        private ISpecFlowOutputHelper _outputHelper;
 
-        public Hooks(MyDriverManager myDriverManager, ScenarioContext scenarioContext)
+        public Hooks(MyDriverManager myDriverManager, ScenarioContext scenarioContext, ISpecFlowOutputHelper outputHelper)
         {
             _scenarioContext = scenarioContext;
             _myDriverManager = myDriverManager;
@@ -32,6 +34,11 @@ namespace nUnitSpecflow.Hooks
         [AfterScenario]
         public void Teardown()
         {
+            if (_scenarioContext.ScenarioExecutionStatus != ScenarioExecutionStatus.OK) 
+            {
+                string filename = _myDriverManager.CaptureSnapshot();
+                _outputHelper.AddAttachment(filename);
+            }
             _myDriverManager.Quit();
         }
 

@@ -45,28 +45,12 @@ namespace nUnitSpecflow.Hooks
 
         internal IWebElement FindElement(By locator)
         {
-            try
-            {
-                return _webDriver.FindElement(locator);
-            }
-            catch
-            {
-                CaptureSnapshot();
-                throw;
-            }
+            return _webDriver.FindElement(locator);
         }
 
         internal ReadOnlyCollection<IWebElement> FindElements(By locator)
         {
-            try
-            {
-                return _webDriver.FindElements(locator);
-            }
-            catch
-            {
-                CaptureSnapshot();
-                throw;
-            }
+            return _webDriver.FindElements(locator);
         }
 
         internal void Quit()
@@ -81,11 +65,13 @@ namespace nUnitSpecflow.Hooks
             dropdownElement.SelectByText(filterCriteria);
         }
 
-        private void CaptureSnapshot()
+        public string CaptureSnapshot()
         {
+            string filename = $"{DateTime.Now.ToString("yyMMddmmss")}.png";
             ((ITakesScreenshot)_webDriver).GetScreenshot().SaveAsFile(
-                Path.Combine(_snapshotsFolder, $"{DateTime.Now.ToString("yyMMddmmss")}.png")
+                Path.Combine(_snapshotsFolder, filename)
             );
+            return filename;
         }
     }
 }

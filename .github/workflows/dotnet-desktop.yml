@@ -88,5 +88,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.2
       with:
         name: Test Report
-        path: nUnitSpecflow\bin\Debug\net6.0\LivingDoc.html
+        path: |
+            nUnitSpecflow\bin\Debug\net6.0\LivingDoc.html
+            nUnitSpecflow\bin\Debug\net6.0\snapshots
         retention-days: 30   

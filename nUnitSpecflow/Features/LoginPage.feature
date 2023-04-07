@@ -11,6 +11,7 @@ Scenario: User is able to login using valid credentials
 	Examples: 
 	| username      | password         |
 	| standard_user | secret_sauce     |
+	| standard_user | invalid_password |
 
 @regression
 Scenario: User is able to see the inventory
