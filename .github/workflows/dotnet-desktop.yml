@@ -80,6 +80,13 @@ jobs:
 
     - name: Generate report
       run: |
-      dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
-      cd nUnitSpecflow\bin\Debug\net6.0
-      livingdoc test-assembly nUnitSpecflow.dll -t TestExecution.json
+        dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+        cd nUnitSpecflow\bin\Debug\net6.0
+        livingdoc test-assembly nUnitSpecflow.dll -t TestExecution.json
+        
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: Test Report
+        path: nUnitSpecflow\bin\Debug\net6.0\LivingDoc.html
+        retention-days: 30   
