@@ -77,3 +77,9 @@ jobs:
     # Execute all unit tests in the solution
     - name: Execute unit tests
       run: dotnet test --settings nUnitSpecflow\edge.runsettings
+
+    - name: Generate report
+      run: |
+      dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+      cd nUnitSpecflow\bin\Debug\net6.0
+      livingdoc test-assembly nUnitSpecflow.dll -t TestExecution.json
