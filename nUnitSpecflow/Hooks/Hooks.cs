@@ -19,6 +19,7 @@ namespace nUnitSpecflow.Hooks
         {
             _scenarioContext = scenarioContext;
             _myDriverManager = myDriverManager;
+            _outputHelper = outputHelper;
         }
 
         [BeforeScenario]
