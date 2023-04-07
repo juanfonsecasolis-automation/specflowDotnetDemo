@@ -38,6 +38,7 @@
     <None Update="edge.runsettings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>edge.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
