@@ -10,7 +10,8 @@ namespace nUnitSpecflow.Factories
     {
         Chrome,
         Firefox,
-        Edge
+        Edge,
+        ChromeRaspberryPi
     }
 
     internal class WebDriverFactory
@@ -33,6 +34,9 @@ namespace nUnitSpecflow.Factories
                         chromeOptions.AddArgument("--headless");
                     new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
                     webDriver = new ChromeDriver(chromeOptions);
+                    break;
+                case WebBrowserType.ChromeRaspberryPi:
+                    webDriver = new ChromeDriver("/usr/lib/chromium-browser/chromedriver");
                     break;
                 default:
                     throw new NotSupportedException();
