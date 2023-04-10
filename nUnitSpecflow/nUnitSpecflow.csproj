@@ -35,6 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="chromeRaspberryPi.runsettings">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="edge.runsettings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>edge.Designer.cs</LastGenOutput>
