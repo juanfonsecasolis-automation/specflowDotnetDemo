@@ -38,12 +38,11 @@ namespace nUnitSpecflow.Factories
                     break;
                 case WebBrowserType.ChromeRaspberryPi:
                     var chromeRaspberryPiOptions = new ChromeOptions();
-                    chromeRaspberryPiOptions.BinaryLocation = "/usr/lib/chromium-browser";
                     chromeRaspberryPiOptions.AddArguments("--no-sandbox");
                     chromeRaspberryPiOptions.AddArguments("--disable-dev-shm-usage");
                     if (SettingsManager.HeadlessEnabled)
                         chromeRaspberryPiOptions.AddArgument("--headless");
-                    webDriver = new ChromeDriver(chromeRaspberryPiOptions);
+                    webDriver = new ChromeDriver("/usr/lib/chromium-browser", chromeRaspberryPiOptions);
                     break;
                 default:
                     throw new NotSupportedException();
