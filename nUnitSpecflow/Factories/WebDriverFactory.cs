@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Chrome;
 using WebDriverManager.DriverConfigs.Impl;
+using OpenQA.Selenium.Interactions;
 
 namespace nUnitSpecflow.Factories
 {
@@ -36,7 +37,13 @@ namespace nUnitSpecflow.Factories
                     webDriver = new ChromeDriver(chromeOptions);
                     break;
                 case WebBrowserType.ChromeRaspberryPi:
-                    webDriver = new ChromeDriver("/usr/lib/chromium-browser");
+                    var chromeRaspberryPiOptions = new ChromeOptions();
+                    chromeRaspberryPiOptions.BinaryLocation = "/usr/lib/chromium-browser";
+                    chromeRaspberryPiOptions.AddArguments("--no-sandbox");
+                    chromeRaspberryPiOptions.AddArguments("--disable-dev-shm-usage");
+                    if (SettingsManager.HeadlessEnabled)
+                        chromeRaspberryPiOptions.AddArgument("--headless");
+                    webDriver = new ChromeDriver(chromeRaspberryPiOptions);
                     break;
                 default:
                     throw new NotSupportedException();
