@@ -36,7 +36,7 @@ namespace nUnitSpecflow.Factories
                     webDriver = new ChromeDriver(chromeOptions);
                     break;
                 case WebBrowserType.ChromeRaspberryPi:
-                    webDriver = new ChromeDriver("/usr/lib/chromium-browser/chromedriver");
+                    webDriver = new ChromeDriver("/usr/lib/chromium-browser");
                     break;
                 default:
                     throw new NotSupportedException();
