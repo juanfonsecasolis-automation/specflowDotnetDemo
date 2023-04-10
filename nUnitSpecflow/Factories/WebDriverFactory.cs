@@ -38,6 +38,8 @@ namespace nUnitSpecflow.Factories
                     break;
                 case WebBrowserType.ChromeRaspberryPi:
                     var chromeRaspberryPiOptions = new ChromeOptions();
+                    chromeRaspberryPiOptions.AddArguments("--no-sandbox");
+                    chromeRaspberryPiOptions.AddArguments("--disable-dev-shm-usage");
                     if (SettingsManager.HeadlessEnabled)
                         chromeRaspberryPiOptions.AddArgument("--headless");
                     webDriver = new ChromeDriver("/usr/lib/chromium-browser", chromeRaspberryPiOptions);    // run `sudo apt-get install chromium-chromedriver` in the RPi
