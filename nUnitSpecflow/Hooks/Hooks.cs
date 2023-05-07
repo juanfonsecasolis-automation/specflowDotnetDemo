@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using nUnitSpecflow.Pages;
+using nUnitSpecflow.Steps;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Infrastructure;
@@ -15,11 +17,23 @@ namespace nUnitSpecflow.Hooks
         private MyDriverManager _myDriverManager;
         private ISpecFlowOutputHelper _outputHelper;
 
-        public Hooks(MyDriverManager myDriverManager, ScenarioContext scenarioContext, ISpecFlowOutputHelper outputHelper)
+        public Hooks(FeatureContext featureContext, ScenarioContext scenarioContext, ISpecFlowOutputHelper outputHelper)
         {
             _scenarioContext = scenarioContext;
-            _myDriverManager = myDriverManager;
             _outputHelper = outputHelper;
+            _myDriverManager = featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString());
+        }
+
+        [BeforeFeature]
+        public static void BeforeFeature(FeatureContext featureContext)
+        {
+            featureContext.Add(ContextKeys.MyWebDriver.ToString(), new MyDriverManager());
+        }
+
+        [AfterFeature]
+        public static void AfterFeature(FeatureContext featureContext)
+        {
+            featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString()).Quit();
         }
 
         [BeforeScenario]
@@ -35,12 +49,22 @@ namespace nUnitSpecflow.Hooks
         [AfterScenario]
         public void Teardown()
         {
+            // take a snapshot if an error ocurred
             if (_scenarioContext.ScenarioExecutionStatus != ScenarioExecutionStatus.OK) 
             {
                 string filename = _myDriverManager.CaptureSnapshot();
                 _outputHelper.AddAttachment(filename);
             }
-            _myDriverManager.Quit();
+
+            // log off
+            try
+            {
+                new InventoryPage(_myDriverManager).LogOut();
+            }
+            catch
+            {
+                TestContext.WriteLine("Skipping logout.");
+            }
         }
 
         List<string> GetIgnoreTagLabels()

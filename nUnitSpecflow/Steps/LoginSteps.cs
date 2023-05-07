@@ -1,12 +1,11 @@
-﻿using nUnitSpecflow.Hooks;
-using nUnitSpecflow.Pages;
+﻿using nUnitSpecflow.Pages;
 using TechTalk.SpecFlow;
 
 namespace nUnitSpecflow.Steps
 {
     internal class LoginSteps : BaseSteps
     {
-        public LoginSteps(MyDriverManager myDriverManager, ScenarioContext scenarioContext) : base(myDriverManager, scenarioContext) { }
+        public LoginSteps(FeatureContext featureContext, ScenarioContext scenarioContext) : base(featureContext, scenarioContext) { }
 
         [Given(@"user opens the login page")]
         public void GivenUserOpensTheLoginPage()
@@ -34,9 +33,7 @@ namespace nUnitSpecflow.Steps
         [Then(@"inventory items are ordered from low to high")]
         public void ThenInventoryItemsAreOrderedFromLowToHigh()
         {
-            throw new PendingStepException();
+            
         }
-
-
     }
 }

@@ -4,5 +4,6 @@
     <Parameter name="headlessEnabled" value="true"/>
     <Parameter name="webBrowser" value="ChromeRaspberryPi" />
     <Parameter name="webAppUrl" value="https://www.saucedemo.com/" />
+    <Parameter name="secsTimeoutElementVisible" value="15" />
   </TestRunParameters>
 </RunSettings>

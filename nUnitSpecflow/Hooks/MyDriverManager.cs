@@ -2,20 +2,15 @@
 using nUnitSpecflow.DataAccess;
 using nUnitSpecflow.Factories;
 using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V85.CSS;
-using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Support.UI;
 using System.Collections.ObjectModel;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
-using NUnit.Framework;
-using AngleSharp.Html.Dom;
-using OpenQA.Selenium.Support.UI;
 
 namespace nUnitSpecflow.Hooks
 {
-    enum AssertionType 
-    { 
+    enum AssertionType
+    {
         True,
         False
     }
@@ -25,11 +20,10 @@ namespace nUnitSpecflow.Hooks
     {
         WebDriver _webDriver;
         string _snapshotsFolder;
-        ScenarioContext _scenarioContext;
+        WebDriverWait _webDriverWait;
 
-        public MyDriverManager(ScenarioContext scenarioContext)
+        public MyDriverManager()
         {
-            _scenarioContext = scenarioContext;
             WebBrowserType webBrowserType = (WebBrowserType)Enum.Parse(
                 typeof(WebBrowserType),
                 SettingsManager.WebBrowser
@@ -41,15 +35,24 @@ namespace nUnitSpecflow.Hooks
             {
                 Directory.CreateDirectory(_snapshotsFolder);
             }
+            _webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(SettingsManager.SecsTimeoutElementVisible));
         }
 
-        internal IWebElement FindElement(By locator)
+        internal IWebElement FindElement(By locator, bool waitUntilVisible=true)
         {
+            if (waitUntilVisible)
+            {
+                _webDriverWait.Until(x => x.FindElement(locator).Enabled && x.FindElement(locator).Displayed);
+            }
             return _webDriver.FindElement(locator);
         }
 
-        internal ReadOnlyCollection<IWebElement> FindElements(By locator)
+        internal ReadOnlyCollection<IWebElement> FindElements(By locator, bool waitUntilVisible = true)
         {
+            if (waitUntilVisible)
+            {
+                _webDriverWait.Until(x => x.FindElement(locator).Enabled && x.FindElement(locator).Displayed);
+            }
             return _webDriver.FindElements(locator);
         }
 

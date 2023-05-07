@@ -27,5 +27,11 @@ namespace nUnitSpecflow.Pages
             return MyDriverManager.FindElements(By.CssSelector(".inventory_item"))
                 .Select(x => x.Text).ToList<string>();
         }
+
+        internal void LogOut()
+        {
+            MyDriverManager.FindElement(By.Id("react-burger-menu-btn")).Click();
+            MyDriverManager.FindElement(By.Id("logout_sidebar_link")).Click();
+        }
     }
 }

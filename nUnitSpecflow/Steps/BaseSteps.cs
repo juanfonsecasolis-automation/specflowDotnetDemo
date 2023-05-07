@@ -11,7 +11,8 @@ namespace nUnitSpecflow.Steps
 {
     enum ContextKeys
     {
-        CurrentPage
+        CurrentPage,
+        MyWebDriver
     }
 
     [Binding]
@@ -26,8 +27,8 @@ namespace nUnitSpecflow.Steps
             set => Set(value, ContextKeys.CurrentPage);
         }
 
-        public BaseSteps(MyDriverManager myDriverManager, ScenarioContext scenarioContext) {
-            MyDriverManager = myDriverManager;
+        public BaseSteps(FeatureContext featureContext, ScenarioContext scenarioContext) {
+            MyDriverManager = featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString());
             _scenarioContext = scenarioContext;
         }
 

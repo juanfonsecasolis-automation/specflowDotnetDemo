@@ -8,7 +8,7 @@ namespace nUnitSpecflow.Steps
     [Binding]
     internal class InventorySteps : BaseSteps
     {
-        public InventorySteps(MyDriverManager myDriverManager, ScenarioContext scenarioContext) : base(myDriverManager, scenarioContext) { }
+        public InventorySteps(FeatureContext featureContext, ScenarioContext scenarioContext) : base(featureContext, scenarioContext) { }
 
         [Then(@"only six items are rendered")]
         public void ThenOnlySixItemsAreRendered()
