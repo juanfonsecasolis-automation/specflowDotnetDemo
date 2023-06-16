@@ -76,5 +76,10 @@ namespace nUnitSpecflow.Hooks
             );
             return filename;
         }
+
+        internal void ExecuteJavascript(string script)
+        {
+            var output = ((IJavaScriptExecutor)_webDriver).ExecuteScript(script);
+        }
     }
 }
