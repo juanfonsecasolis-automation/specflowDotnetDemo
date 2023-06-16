@@ -1,7 +1,8 @@
 ﻿Feature: About
 
-@tag1
+@regression
 Scenario: User can access the about page
 	Given user logs in using valid credentials
+	And user starts intercepting network traffic
 	When user selects "About" in the hamburger menu
-	Then the saucelabs webpage is displayed
+	Then user request "https://saucelabs.com/" completes with status "200"

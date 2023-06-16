@@ -21,6 +21,9 @@ namespace nUnitSpecflow.Hooks
         WebDriver _webDriver;
         string _snapshotsFolder;
         WebDriverWait _webDriverWait;
+        NetworkManager _networkManager;
+        Dictionary<string, long> _responseStatusLog;
+        public Dictionary<string, long> ResponseStatusLog => _responseStatusLog;
 
         public MyDriverManager()
         {
@@ -36,9 +39,15 @@ namespace nUnitSpecflow.Hooks
                 Directory.CreateDirectory(_snapshotsFolder);
             }
             _webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(SettingsManager.SecsTimeoutElementVisible));
+
+            // network monitoring
+            _networkManager = new NetworkManager(_webDriver);
+            _networkManager.NetworkRequestSent += InterceptNetworkRequestSent;
+            _networkManager.NetworkResponseReceived += InterceptNetworkResponseReceived;
+            _responseStatusLog = new Dictionary<string, long>();
         }
 
-        internal IWebElement FindElement(By locator, bool waitUntilVisible=true)
+        internal IWebElement FindElement(By locator, bool waitUntilVisible = true)
         {
             if (waitUntilVisible)
             {
@@ -79,7 +88,35 @@ namespace nUnitSpecflow.Hooks
 
         internal void ExecuteJavascript(string script)
         {
-            var output = ((IJavaScriptExecutor)_webDriver).ExecuteScript(script);
+            ((IJavaScriptExecutor)_webDriver).ExecuteScript(script);
+        }
+
+        void InterceptNetworkRequestSent(object? sender, NetworkRequestSentEventArgs e)
+        {
+            TestContext.WriteLine($"Request sent: '{e.RequestUrl}'");
+        }
+
+        void InterceptNetworkResponseReceived(object? sender, NetworkResponseReceivedEventArgs e)
+        {
+            if (_responseStatusLog.ContainsKey(e.ResponseUrl))
+            {
+                _responseStatusLog[e.ResponseUrl] = e.ResponseStatusCode;
+            }
+            else
+            {
+                _responseStatusLog.Add(e.ResponseUrl, e.ResponseStatusCode);
+            }
+        }
+
+        internal async void StartInterceptingNetworkTraffic()
+        {
+            _responseStatusLog.Clear();
+            await _networkManager.StartMonitoring();
+        }
+
+        internal void StopInterceptingNetworkTraffic()
+        {
+            _networkManager.StopMonitoring();
         }
     }
 }
