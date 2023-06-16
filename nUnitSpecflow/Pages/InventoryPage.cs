@@ -10,6 +10,12 @@ namespace nUnitSpecflow.Pages
         By _productsHeaderLocator = By.XPath("//span[@class='title']");
         By _filterDropdownLocator = By.XPath("//select[@data-test='product_sort_container']");
 
+        public enum InventoryItemFieldType
+        {
+            Name,
+            Price
+        }
+
         public InventoryPage(MyDriverManager myDriverManager) : base(myDriverManager) { }
 
         public override void VerifyPageLoadedCorrectly()
@@ -22,10 +28,15 @@ namespace nUnitSpecflow.Pages
             MyDriverManager.SelectElementFromDropdown(_filterDropdownLocator, filterCriteria);
         }
 
-        internal List<string> GetInventoryItems()
+        internal List<string> GetInventoryItems(InventoryItemFieldType fieldType)
         {
-            return MyDriverManager.FindElements(By.CssSelector(".inventory_item"))
-                .Select(x => x.Text).ToList<string>();
+            By locator = fieldType switch
+            {
+                InventoryItemFieldType.Name => By.ClassName("inventory_item_name"),
+                InventoryItemFieldType.Price => By.ClassName("inventory_item_price"),
+                _ => By.CssSelector(".inventory_item")
+            };
+            return MyDriverManager.FindElements(locator).Select(x => x.Text).ToList<string>();
         }
 
         internal void LogOut()

@@ -1,5 +1,8 @@
-﻿using nUnitSpecflow.Pages;
+﻿using NUnit.Framework;
+using nUnitSpecflow.DataAccess;
+using nUnitSpecflow.Pages;
 using TechTalk.SpecFlow;
+using static nUnitSpecflow.Pages.InventoryPage;
 
 namespace nUnitSpecflow.Steps
 {
@@ -30,10 +33,11 @@ namespace nUnitSpecflow.Steps
             ((InventoryPage)CurrentPage).FilterBy(filterCriteria);
         }
 
-        [Then(@"inventory items are ordered from low to high")]
-        public void ThenInventoryItemsAreOrderedFromLowToHigh()
+        [Given(@"user logs in using valid credentials")]
+        public void GivenUserLogsInUsingValidCredentials()
         {
-            
+            GivenUserOpensTheLoginPage();
+            WhenUserLoginsWithUsernameAndPassword(SettingsManager.Username, SettingsManager.Password);
         }
     }
 }

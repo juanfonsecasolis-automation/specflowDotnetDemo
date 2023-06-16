@@ -1,6 +1,6 @@
 ﻿Feature: LoginPage
 
-User can open the Login Page
+User can user the Login Page
 
 @regression
 Scenario: User is able to login using valid credentials
