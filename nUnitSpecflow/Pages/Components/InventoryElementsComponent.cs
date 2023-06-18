@@ -7,8 +7,9 @@ namespace nUnitSpecflow.Pages.Components
     {
         public int Count => _myDriverManager.FindElements(_locator).Count;
 
-        public InventoryElementsComponent(By locator, MyDriverManager myDriverManager) 
-            : base(locator, myDriverManager){ }
+        public InventoryElementsComponent(MyDriverManager myDriverManager) 
+            : base(By.XPath("//*[@class='inventory_item']"), myDriverManager)
+        {}
 
         public InventoryElementComponent GetValue(int index)
         {
