@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using nUnitSpecflow.Hooks;
+using nUnitSpecflow.Pages.Components;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -11,22 +12,28 @@ namespace nUnitSpecflow.Pages
 {
     internal class LoginPage : BasePage
     {
-        By _usernameFieldLocator = By.XPath("//*[@data-test='username']");
-        By _passwordFieldLocator = By.XPath("//*[@data-test='password']");
-        By _loginButtonLocator = By.XPath("//*[@data-test='login-button']");
-
-        public LoginPage(MyDriverManager myDriverManager) : base(myDriverManager) { }
+        TextFieldComponent _usernameTextField;
+        TextFieldComponent _passwordTextField;
+        ButtonComponent _loginButton;
+        
+        public LoginPage(MyDriverManager myDriverManager) : base(myDriverManager) 
+        {
+            _usernameTextField = new TextFieldComponent(By.XPath("//*[@data-test='username']"), myDriverManager);
+            _passwordTextField = new TextFieldComponent(By.XPath("//*[@data-test='password']"), myDriverManager);
+            _loginButton = new ButtonComponent(By.XPath("//*[@data-test='login-button']"), myDriverManager);
+            VerifyPageLoadedCorrectly();
+        }
 
         public override void VerifyPageLoadedCorrectly()
         {
-            Assert.True(MyDriverManager.FindElement(_usernameFieldLocator).Displayed);
+            Assert.True(_usernameTextField.IsDisplayed);
         }
 
         internal InventoryPage LoginAndGetInventoryPage(string username, string password)
         {
-            MyDriverManager.FindElement(_usernameFieldLocator).SendKeys(username);
-            MyDriverManager.FindElement(_passwordFieldLocator).SendKeys(password);
-            MyDriverManager.FindElement(_loginButtonLocator).Click();
+            _usernameTextField.Type(username);
+            _passwordTextField.Type(password);
+            _loginButton.Click();
             return new InventoryPage(MyDriverManager); // TODO: handle bad login
         }
     }

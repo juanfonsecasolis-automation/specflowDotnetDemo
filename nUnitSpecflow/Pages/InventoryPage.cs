@@ -1,48 +1,33 @@
 ﻿using NUnit.Framework;
 using nUnitSpecflow.Hooks;
+using nUnitSpecflow.Pages.Components;
 using OpenQA.Selenium;
 using WebDriverManager;
 
 namespace nUnitSpecflow.Pages
 {
-    internal class InventoryPage : BasePage
+    internal class InventoryPage : WithUpperMenuPage
     {
-        By _productsHeaderLocator = By.XPath("//span[@class='title']");
-        By _filterDropdownLocator = By.XPath("//select[@data-test='product_sort_container']");
+        LabelComponent _productHeaderLabel;
+        DropdownComponent _filterDropdown;
+        public InventoryElementsComponent InventoryElements;
 
-        public enum InventoryItemFieldType
+        public InventoryPage(MyDriverManager myDriverManager) : base(myDriverManager) 
         {
-            Name,
-            Price
+            _productHeaderLabel = new LabelComponent(By.XPath("//span[@class='title']"), MyDriverManager);
+            _filterDropdown = new DropdownComponent(By.XPath("//select[@data-test='product_sort_container']"), MyDriverManager);
+            InventoryElements = new InventoryElementsComponent(By.ClassName("inventory_item"), MyDriverManager);
+            VerifyPageLoadedCorrectly();
         }
-
-        public InventoryPage(MyDriverManager myDriverManager) : base(myDriverManager) { }
 
         public override void VerifyPageLoadedCorrectly()
         {
-            Assert.True(MyDriverManager.FindElement(_productsHeaderLocator).Displayed);
+            Assert.True(_productHeaderLabel.IsDisplayed);
         }
 
         internal void FilterBy(string filterCriteria)
         {
-            MyDriverManager.SelectElementFromDropdown(_filterDropdownLocator, filterCriteria);
-        }
-
-        internal List<string> GetInventoryItems(InventoryItemFieldType fieldType)
-        {
-            By locator = fieldType switch
-            {
-                InventoryItemFieldType.Name => By.ClassName("inventory_item_name"),
-                InventoryItemFieldType.Price => By.ClassName("inventory_item_price"),
-                _ => By.CssSelector(".inventory_item")
-            };
-            return MyDriverManager.FindElements(locator).Select(x => x.Text).ToList<string>();
-        }
-
-        internal void LogOut()
-        {
-            MyDriverManager.FindElement(By.Id("react-burger-menu-btn")).Click();
-            MyDriverManager.FindElement(By.Id("logout_sidebar_link")).Click();
+            _filterDropdown.SelectElementByText(filterCriteria);
         }
     }
 }

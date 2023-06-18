@@ -9,7 +9,6 @@ namespace nUnitSpecflow.Pages
         public BasePage(MyDriverManager myDriverManager)
         {
             MyDriverManager = myDriverManager;
-            VerifyPageLoadedCorrectly();
         }
 
         public abstract void VerifyPageLoadedCorrectly();

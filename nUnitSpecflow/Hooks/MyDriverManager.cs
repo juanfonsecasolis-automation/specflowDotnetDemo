@@ -71,12 +71,6 @@ namespace nUnitSpecflow.Hooks
             _webDriver.Quit();
         }
 
-        internal void SelectElementFromDropdown(By filterDropdownLocator, string filterCriteria)
-        {
-            var dropdownElement = new SelectElement(_webDriver.FindElement(filterDropdownLocator));
-            dropdownElement.SelectByText(filterCriteria);
-        }
-
         public string CaptureSnapshot()
         {
             string filename = $"{DateTime.Now.ToString("yyMMddmmss")}.png";
