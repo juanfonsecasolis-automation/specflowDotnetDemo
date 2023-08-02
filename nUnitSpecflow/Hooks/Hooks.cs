@@ -34,7 +34,7 @@ namespace nUnitSpecflow.Hooks
         public static void AfterFeature(FeatureContext featureContext)
         {
             featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString()).Quit();
-        }
+        } 
 
         [BeforeScenario]
         public void Setup()
