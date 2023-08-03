@@ -4,6 +4,7 @@
     <Parameter name="headlessEnabled" value="false"/>
     <Parameter name="webBrowser" value="Chrome" />
     <Parameter name="webAppUrl" value="https://www.saucedemo.com/" />
+    <Parameter name="reqResUrl" value="https://reqres.in/" />
     <Parameter name="secsTimeoutElementVisible" value="15" />
     <Parameter name="username" value="standard_user" />
     <Parameter name="password" value="secret_sauce" />

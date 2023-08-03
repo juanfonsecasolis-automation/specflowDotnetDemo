@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using RestSharp;
 
 namespace nUnitSpecflow.DataAccess
 {
@@ -13,5 +14,7 @@ namespace nUnitSpecflow.DataAccess
         public static string Username => TestContext.Parameters["username"];
 
         public static string Password => TestContext.Parameters["password"];
+
+        public static string ReqResUrl => TestContext.Parameters["reqResUrl"];
     }
 }

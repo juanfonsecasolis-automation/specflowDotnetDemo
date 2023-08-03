@@ -11,7 +11,7 @@ using TechTalk.SpecFlow.Infrastructure;
 namespace nUnitSpecflow.Hooks
 {
     [Binding]
-    class Hooks
+    public class Hooks
     {
         private ScenarioContext _scenarioContext;
         private MyDriverManager _myDriverManager;
@@ -21,19 +21,27 @@ namespace nUnitSpecflow.Hooks
         {
             _scenarioContext = scenarioContext;
             _outputHelper = outputHelper;
-            _myDriverManager = featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString());
+            if (featureContext.FeatureInfo.Tags.Contains(BaseSteps.UiTestLabel)) {
+                _myDriverManager = featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString());
+            }
         }
 
         [BeforeFeature]
         public static void BeforeFeature(FeatureContext featureContext)
         {
-            featureContext.Add(ContextKeys.MyWebDriver.ToString(), new MyDriverManager());
+            if (featureContext.FeatureInfo.Tags.Contains(BaseSteps.UiTestLabel))
+            {
+                featureContext.Add(ContextKeys.MyWebDriver.ToString(), new MyDriverManager());
+            }
         }
 
         [AfterFeature]
         public static void AfterFeature(FeatureContext featureContext)
         {
-            featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString()).Quit();
+            if (featureContext.FeatureInfo.Tags.Contains(BaseSteps.UiTestLabel))
+            {
+                featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString()).Quit();
+            }
         } 
 
         [BeforeScenario]
@@ -47,23 +55,26 @@ namespace nUnitSpecflow.Hooks
         }
 
         [AfterScenario]
-        public void Teardown()
+        public void Teardown(ScenarioContext scenarioContext)
         {
-            // take a snapshot if an error ocurred
-            if (_scenarioContext.ScenarioExecutionStatus != ScenarioExecutionStatus.OK) 
+            if (scenarioContext.ScenarioInfo.ScenarioAndFeatureTags.Contains(BaseSteps.UiTestLabel))
             {
-                string filename = _myDriverManager.CaptureSnapshot();
-                _outputHelper.AddAttachment(filename);
-            }
+                // take a snapshot if an error ocurred
+                if (_scenarioContext.ScenarioExecutionStatus != ScenarioExecutionStatus.OK)
+                {
+                    string filename = _myDriverManager.CaptureSnapshot();
+                    _outputHelper.AddAttachment(filename);
+                }
 
-            // log off
-            try
-            {
-                new InventoryPage(_myDriverManager).LogOut();
-            }
-            catch
-            {
-                TestContext.WriteLine("Skipping logout.");
+                // log off
+                try
+                {
+                    new InventoryPage(_myDriverManager).LogOut();
+                }
+                catch
+                {
+                    TestContext.WriteLine("Skipping logout.");
+                }
             }
         }
 

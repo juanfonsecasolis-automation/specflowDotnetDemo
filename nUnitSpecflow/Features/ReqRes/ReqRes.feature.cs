@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace nUnitSpecflow.Features
+namespace nUnitSpecflow.Features.ReqRes
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,22 +20,22 @@ namespace nUnitSpecflow.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("LoginPage")]
-    public partial class LoginPageFeature
+    [NUnit.Framework.DescriptionAttribute("ReqRes")]
+    public partial class ReqResFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "LogIn.feature"
+#line 1 "ReqRes.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "LoginPage", "User can user the Login Page", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/ReqRes", "ReqRes", "Test for testing an API to administrate users", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,10 +74,11 @@ namespace nUnitSpecflow.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("User is able to login using valid credentials")]
+        [NUnit.Framework.DescriptionAttribute("Verify pagination returns the same number of items specified on the \"per_page\" pr" +
+            "operty (GET)")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("standard_user", "secret_sauce", null)]
-        public void UserIsAbleToLoginUsingValidCredentials(string username, string password, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("5", null)]
+        public void VerifyPaginationReturnsTheSameNumberOfItemsSpecifiedOnThePer_PagePropertyGET(string resultsPerPage, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -87,9 +88,9 @@ namespace nUnitSpecflow.Features
             }
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("username", username);
-            argumentsOfScenario.Add("password", password);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User is able to login using valid credentials", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            argumentsOfScenario.Add("resultsPerPage", resultsPerPage);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify pagination returns the same number of items specified on the \"per_page\" pr" +
+                    "operty (GET)", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,13 +102,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 7
- testRunner.Given("user opens the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("user initializes the ReqRes connection for \"ListUsers\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
- testRunner.When(string.Format("user logins with username \"{0}\" and password \"{1}\"", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("user requests a list of \"{0}\" users", resultsPerPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
- testRunner.Then("the inventory page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("only \"{0}\" users are returned", resultsPerPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

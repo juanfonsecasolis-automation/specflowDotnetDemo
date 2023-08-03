@@ -1,4 +1,5 @@
-﻿Feature: About
+﻿@uiTest
+Feature: About
 
 @regression
 Scenario: User can access the about page

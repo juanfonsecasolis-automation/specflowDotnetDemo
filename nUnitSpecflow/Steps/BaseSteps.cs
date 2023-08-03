@@ -20,6 +20,7 @@ namespace nUnitSpecflow.Steps
     {
         protected MyDriverManager MyDriverManager;
         private ScenarioContext _scenarioContext;
+        public const string UiTestLabel = "uiTest";
 
         protected BasePage CurrentPage 
         {
@@ -28,7 +29,10 @@ namespace nUnitSpecflow.Steps
         }
 
         public BaseSteps(FeatureContext featureContext, ScenarioContext scenarioContext) {
-            MyDriverManager = featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString());
+            if (featureContext.FeatureInfo.Tags.Contains(UiTestLabel)) 
+            {
+                MyDriverManager = featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString());
+            }
             _scenarioContext = scenarioContext;
         }
 

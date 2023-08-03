@@ -1,4 +1,5 @@
-﻿Feature: LoginPage
+﻿@uiTest
+Feature: LoginPage
 
 User can user the Login Page
 

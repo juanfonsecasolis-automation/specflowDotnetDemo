@@ -1,4 +1,5 @@
-﻿Feature: Inventory
+﻿@uiTest
+Feature: Inventory
 
 User can see and interact with the inventory
 
