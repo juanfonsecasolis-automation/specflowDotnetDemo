@@ -27,18 +27,20 @@ namespace nUnitSpecflow.Hooks
 
         public MyDriverManager()
         {
-            WebBrowserType webBrowserType = (WebBrowserType)Enum.Parse(
-                typeof(WebBrowserType),
-                SettingsManager.WebBrowser
-            );
+            WebBrowserType webBrowserType = (WebBrowserType)
+                Enum.Parse(typeof(WebBrowserType), SettingsManager.WebBrowser);
             _webDriver = WebDriverFactory.GetDriver(webBrowserType);
             _webDriver.Url = TestContext.Parameters["webAppUrl"];
-            _snapshotsFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\snapshots";
+            _snapshotsFolder =
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\snapshots";
             if (!Directory.Exists(_snapshotsFolder))
             {
                 Directory.CreateDirectory(_snapshotsFolder);
             }
-            _webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(SettingsManager.SecsTimeoutElementVisible));
+            _webDriverWait = new WebDriverWait(
+                _webDriver,
+                TimeSpan.FromSeconds(SettingsManager.SecsTimeoutElementVisible)
+            );
 
             // network monitoring
             _networkManager = new NetworkManager(_webDriver);
@@ -51,16 +53,23 @@ namespace nUnitSpecflow.Hooks
         {
             if (waitUntilVisible)
             {
-                _webDriverWait.Until(x => x.FindElement(locator).Enabled && x.FindElement(locator).Displayed);
+                _webDriverWait.Until(
+                    x => x.FindElement(locator).Enabled && x.FindElement(locator).Displayed
+                );
             }
             return _webDriver.FindElement(locator);
         }
 
-        internal ReadOnlyCollection<IWebElement> FindElements(By locator, bool waitUntilVisible = true)
+        internal ReadOnlyCollection<IWebElement> FindElements(
+            By locator,
+            bool waitUntilVisible = true
+        )
         {
             if (waitUntilVisible)
             {
-                _webDriverWait.Until(x => x.FindElement(locator).Enabled && x.FindElement(locator).Displayed);
+                _webDriverWait.Until(
+                    x => x.FindElement(locator).Enabled && x.FindElement(locator).Displayed
+                );
             }
             return _webDriver.FindElements(locator);
         }
@@ -74,9 +83,9 @@ namespace nUnitSpecflow.Hooks
         public string CaptureSnapshot()
         {
             string filename = $"{DateTime.Now.ToString("yyMMddmmss")}.png";
-            ((ITakesScreenshot)_webDriver).GetScreenshot().SaveAsFile(
-                Path.Combine(_snapshotsFolder, filename)
-            );
+            ((ITakesScreenshot)_webDriver)
+                .GetScreenshot()
+                .SaveAsFile(Path.Combine(_snapshotsFolder, filename));
             return filename;
         }
 

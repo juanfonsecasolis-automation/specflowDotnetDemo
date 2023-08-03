@@ -42,7 +42,10 @@ namespace nUnitSpecflow.Factories
                     chromeRaspberryPiOptions.AddArguments("--disable-dev-shm-usage");
                     if (SettingsManager.HeadlessEnabled)
                         chromeRaspberryPiOptions.AddArgument("--headless");
-                    webDriver = new ChromeDriver("/usr/lib/chromium-browser", chromeRaspberryPiOptions);    // run `sudo apt-get install chromium-chromedriver` in the RPi
+                    webDriver = new ChromeDriver(
+                        "/usr/lib/chromium-browser",
+                        chromeRaspberryPiOptions
+                    ); // run `sudo apt-get install chromium-chromedriver` in the RPi
                     break;
                 default:
                     throw new NotSupportedException();

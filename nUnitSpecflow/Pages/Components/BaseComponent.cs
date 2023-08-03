@@ -27,7 +27,8 @@ namespace nUnitSpecflow.Pages.Components
 
         protected IWebElement FindElement()
         {
-            return _parentLocator == null ? _myDriverManager.FindElement(_locator)
+            return _parentLocator == null
+                ? _myDriverManager.FindElement(_locator)
                 : _myDriverManager.FindElement(_parentLocator).FindElement(_locator);
         }
     }

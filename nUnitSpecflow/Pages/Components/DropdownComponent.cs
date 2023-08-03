@@ -6,9 +6,8 @@ namespace nUnitSpecflow.Pages.Components
 {
     internal class DropdownComponent : BaseComponent
     {
-        public DropdownComponent(By locator, MyDriverManager myDriverManager) : base(locator, myDriverManager)
-        {
-        }
+        public DropdownComponent(By locator, MyDriverManager myDriverManager)
+            : base(locator, myDriverManager) { }
 
         internal void SelectElementByText(string filterCriteria)
         {

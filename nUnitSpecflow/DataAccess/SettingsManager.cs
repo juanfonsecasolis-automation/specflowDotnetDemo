@@ -7,9 +7,11 @@ namespace nUnitSpecflow.DataAccess
     {
         public static string WebBrowser => TestContext.Parameters["webBrowser"];
 
-        public static bool HeadlessEnabled => TestContext.Parameters["headlessEnabled"].ToLower().Equals("true");
+        public static bool HeadlessEnabled =>
+            TestContext.Parameters["headlessEnabled"].ToLower().Equals("true");
 
-        public static double SecsTimeoutElementVisible => int.Parse(TestContext.Parameters["secsTimeoutElementVisible"]);
+        public static double SecsTimeoutElementVisible =>
+            int.Parse(TestContext.Parameters["secsTimeoutElementVisible"]);
 
         public static string Username => TestContext.Parameters["username"];
 

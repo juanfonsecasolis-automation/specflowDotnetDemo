@@ -10,20 +10,22 @@ namespace nUnitSpecflow.Steps
             About
         }
 
-        public MenuSteps(FeatureContext featureContext, ScenarioContext scenarioContext) : base(featureContext, scenarioContext) { }
+        public MenuSteps(FeatureContext featureContext, ScenarioContext scenarioContext)
+            : base(featureContext, scenarioContext) { }
 
         [When(@"user selects ""([^""]*)"" in the hamburger menu")]
         public void WhenUserSelectsInTheHamburgerMenu(HamburgerElementType elementType)
         {
             MyDriverManager.FindElement(By.Id("react-burger-menu-btn")).Click();
-            MyDriverManager.FindElement(
+            MyDriverManager
+                .FindElement(
                     elementType switch
-                    { 
+                    {
                         HamburgerElementType.About => By.Id("about_sidebar_link"),
                         _ => throw new NotImplementedException()
                     }
-                ).Click();
+                )
+                .Click();
         }
-
     }
 }

@@ -15,12 +15,22 @@ namespace nUnitSpecflow.Pages
         TextFieldComponent _usernameTextField;
         TextFieldComponent _passwordTextField;
         ButtonComponent _loginButton;
-        
-        public LoginPage(MyDriverManager myDriverManager) : base(myDriverManager) 
+
+        public LoginPage(MyDriverManager myDriverManager)
+            : base(myDriverManager)
         {
-            _usernameTextField = new TextFieldComponent(By.XPath("//*[@data-test='username']"), myDriverManager);
-            _passwordTextField = new TextFieldComponent(By.XPath("//*[@data-test='password']"), myDriverManager);
-            _loginButton = new ButtonComponent(By.XPath("//*[@data-test='login-button']"), myDriverManager);
+            _usernameTextField = new TextFieldComponent(
+                By.XPath("//*[@data-test='username']"),
+                myDriverManager
+            );
+            _passwordTextField = new TextFieldComponent(
+                By.XPath("//*[@data-test='password']"),
+                myDriverManager
+            );
+            _loginButton = new ButtonComponent(
+                By.XPath("//*[@data-test='login-button']"),
+                myDriverManager
+            );
             VerifyPageLoadedCorrectly();
         }
 

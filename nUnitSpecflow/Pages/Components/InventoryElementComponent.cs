@@ -10,11 +10,19 @@ namespace nUnitSpecflow.Pages.Components
         LabelComponent _nameLabel;
         LabelComponent _priceLabel;
 
-        public InventoryElementComponent(By locator, MyDriverManager myDriverManager) 
+        public InventoryElementComponent(By locator, MyDriverManager myDriverManager)
             : base(locator, myDriverManager)
         {
-            _nameLabel = new LabelComponent(By.ClassName("inventory_item_name"), _locator, myDriverManager);
-            _priceLabel = new LabelComponent(By.ClassName("inventory_item_price"), _locator, myDriverManager);
+            _nameLabel = new LabelComponent(
+                By.ClassName("inventory_item_name"),
+                _locator,
+                myDriverManager
+            );
+            _priceLabel = new LabelComponent(
+                By.ClassName("inventory_item_price"),
+                _locator,
+                myDriverManager
+            );
         }
     }
 }

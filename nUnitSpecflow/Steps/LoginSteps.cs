@@ -8,7 +8,8 @@ namespace nUnitSpecflow.Steps
 {
     internal class LoginSteps : BaseSteps
     {
-        public LoginSteps(FeatureContext featureContext, ScenarioContext scenarioContext) : base(featureContext, scenarioContext) { }
+        public LoginSteps(FeatureContext featureContext, ScenarioContext scenarioContext)
+            : base(featureContext, scenarioContext) { }
 
         [Given(@"user opens the login page")]
         public void GivenUserOpensTheLoginPage()
@@ -23,9 +24,7 @@ namespace nUnitSpecflow.Steps
         }
 
         [Then(@"the inventory page is displayed")]
-        public void ThenTheInventoryPageIsDisplayed()
-        {
-        }
+        public void ThenTheInventoryPageIsDisplayed() { }
 
         [When(@"user selects ""([^""]*)"" in the filter dropdown")]
         public void WhenUserSelectsInTheFilterDropdown(string filterCriteria)
@@ -37,7 +36,10 @@ namespace nUnitSpecflow.Steps
         public void GivenUserLogsInUsingValidCredentials()
         {
             GivenUserOpensTheLoginPage();
-            WhenUserLoginsWithUsernameAndPassword(SettingsManager.Username, SettingsManager.Password);
+            WhenUserLoginsWithUsernameAndPassword(
+                SettingsManager.Username,
+                SettingsManager.Password
+            );
         }
     }
 }

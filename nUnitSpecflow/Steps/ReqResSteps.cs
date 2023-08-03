@@ -9,8 +9,8 @@ namespace nUnitSpecflow.Steps
 {
     internal class ReqResSteps : BaseSteps
     {
-        public enum ReqResRequestType 
-        { 
+        public enum ReqResRequestType
+        {
             ListUsers
         }
 
@@ -18,8 +18,8 @@ namespace nUnitSpecflow.Steps
         RestRequest _restRequest;
         JsonSerializable _jsonSerializableResponse;
 
-        public ReqResSteps(FeatureContext featureContext, ScenarioContext scenarioContext) 
-            : base(featureContext, scenarioContext) 
+        public ReqResSteps(FeatureContext featureContext, ScenarioContext scenarioContext)
+            : base(featureContext, scenarioContext)
         {
             _restClient = new RestClient(SettingsManager.ReqResUrl);
         }
@@ -29,7 +29,7 @@ namespace nUnitSpecflow.Steps
         {
             _restRequest = new RestRequest(
                 requestType switch
-                { 
+                {
                     ReqResRequestType.ListUsers => "/api/users",
                     _ => throw new NotImplementedException()
                 }
@@ -46,9 +46,13 @@ namespace nUnitSpecflow.Steps
         [Then(@"only ""([^""]*)"" users are returned")]
         public void ThenOnlyUsersAreReturned(int expectedPerPageUsers)
         {
-            var userListDto = (UserListDto) _jsonSerializableResponse;
+            var userListDto = (UserListDto)_jsonSerializableResponse;
             Assert.That(userListDto.Data.Count(), Is.EqualTo(expectedPerPageUsers));
-            Assert.That(userListDto.PerPage, Is.EqualTo(expectedPerPageUsers), "per_page returned an unexpected value.");
+            Assert.That(
+                userListDto.PerPage,
+                Is.EqualTo(expectedPerPageUsers),
+                "per_page returned an unexpected value."
+            );
         }
     }
 }

@@ -11,10 +11,17 @@ namespace nUnitSpecflow.Pages
         DropdownComponent _filterDropdown;
         public InventoryElementsComponent InventoryElements;
 
-        public InventoryPage(MyDriverManager myDriverManager) : base(myDriverManager)
+        public InventoryPage(MyDriverManager myDriverManager)
+            : base(myDriverManager)
         {
-            _productHeaderLabel = new LabelComponent(By.XPath("//span[@class='title']"), MyDriverManager);
-            _filterDropdown = new DropdownComponent(By.XPath("//select[@data-test='product_sort_container']"), MyDriverManager);
+            _productHeaderLabel = new LabelComponent(
+                By.XPath("//span[@class='title']"),
+                MyDriverManager
+            );
+            _filterDropdown = new DropdownComponent(
+                By.XPath("//select[@data-test='product_sort_container']"),
+                MyDriverManager
+            );
             InventoryElements = new InventoryElementsComponent(MyDriverManager);
             VerifyPageLoadedCorrectly();
         }

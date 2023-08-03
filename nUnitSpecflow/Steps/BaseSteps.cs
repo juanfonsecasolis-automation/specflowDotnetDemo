@@ -22,21 +22,24 @@ namespace nUnitSpecflow.Steps
         private ScenarioContext _scenarioContext;
         public const string UiTestLabel = "uiTest";
 
-        protected BasePage CurrentPage 
+        protected BasePage CurrentPage
         {
             get => Get<BasePage>(ContextKeys.CurrentPage);
             set => Set(value, ContextKeys.CurrentPage);
         }
 
-        public BaseSteps(FeatureContext featureContext, ScenarioContext scenarioContext) {
-            if (featureContext.FeatureInfo.Tags.Contains(UiTestLabel)) 
+        public BaseSteps(FeatureContext featureContext, ScenarioContext scenarioContext)
+        {
+            if (featureContext.FeatureInfo.Tags.Contains(UiTestLabel))
             {
-                MyDriverManager = featureContext.Get<MyDriverManager>(ContextKeys.MyWebDriver.ToString());
+                MyDriverManager = featureContext.Get<MyDriverManager>(
+                    ContextKeys.MyWebDriver.ToString()
+                );
             }
             _scenarioContext = scenarioContext;
         }
 
-        protected T Get<T>(ContextKeys contextKeys) 
+        protected T Get<T>(ContextKeys contextKeys)
         {
             return _scenarioContext.Get<T>(contextKeys.ToString());
         }

@@ -1,6 +1,4 @@
 ﻿namespace nUnitSpecflow.DataAccess.DTO
 {
-    public abstract class JsonSerializable
-    {
-    }
+    public abstract class JsonSerializable { }
 }

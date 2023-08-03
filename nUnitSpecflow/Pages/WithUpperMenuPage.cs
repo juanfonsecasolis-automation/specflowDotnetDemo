@@ -14,7 +14,8 @@ namespace nUnitSpecflow.Pages
     {
         MenuComponent _hamburgerMenu;
 
-        public WithUpperMenuPage(MyDriverManager myDriverManager) : base(myDriverManager)
+        public WithUpperMenuPage(MyDriverManager myDriverManager)
+            : base(myDriverManager)
         {
             _hamburgerMenu = new MenuComponent(By.Id("react-burger-menu-btn"), MyDriverManager);
         }

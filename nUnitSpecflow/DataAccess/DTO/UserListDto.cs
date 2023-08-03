@@ -4,7 +4,8 @@ namespace nUnitSpecflow.DataAccess.DTO
 {
     public class UserListDto : JsonSerializable
     {
-        public UserListDto() : base(){}
+        public UserListDto()
+            : base() { }
 
         [JsonProperty("page")]
         public int Page { get; set; }
