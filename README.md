@@ -3,11 +3,16 @@ Demo project for testing the site https://www.saucedemo.com/ and [ReqRes API](ht
 
 ## Installation
 * In the VS Installer, add the Desktop Applications module
-* From the NuGet Package Manager install:
+
+## Nuget packages
     * nUnitSpecflow
     * SpecFlow.Plus.LivingDocPlugin
     * WebDriverManager.Net
-* Go to Extensions > Manage Extensions > install "Specflow for Visual Studio 2022"
+
+## Extensions
+Go to Extensions > Manage Extensions
+* "Specflow for Visual Studio 2022"
+* "CSharpier"
 
 ## Setup
 * Create a new nUnit project
