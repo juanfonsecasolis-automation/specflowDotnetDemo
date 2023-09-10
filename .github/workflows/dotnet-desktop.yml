@@ -39,6 +39,16 @@
 name: .NET Core Desktop
 
 on:
+  workflow_dispatch:
+    inputs:
+      runsettings:
+        description: 'Runsettings'
+        required: true
+        default: 'chrome.runsettings'
+        type: choice
+        options:
+        - chrome.runsettings
+        - edge.runsettings
   push:
     branches: [ "main" ]
   pull_request:
