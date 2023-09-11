@@ -1,9 +1,8 @@
 ﻿using nUnitSpecflow.DataAccess;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using WebDriverManager.DriverConfigs.Impl;
-using OpenQA.Selenium.Interactions;
 
 namespace nUnitSpecflow.Factories
 {

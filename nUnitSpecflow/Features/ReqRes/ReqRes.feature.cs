@@ -74,11 +74,11 @@ namespace nUnitSpecflow.Features.ReqRes
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify pagination returns the same number of items specified on the \"per_page\" pr" +
-            "operty (GET)")]
+        [NUnit.Framework.DescriptionAttribute("Verify pagination returns the same number of items specified on the per page prop" +
+            "erty (GET)")]
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("5", null)]
-        public void VerifyPaginationReturnsTheSameNumberOfItemsSpecifiedOnThePer_PagePropertyGET(string resultsPerPage, string[] exampleTags)
+        public void VerifyPaginationReturnsTheSameNumberOfItemsSpecifiedOnThePerPagePropertyGET(string resultsPerPage, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -89,8 +89,8 @@ namespace nUnitSpecflow.Features.ReqRes
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("resultsPerPage", resultsPerPage);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify pagination returns the same number of items specified on the \"per_page\" pr" +
-                    "operty (GET)", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify pagination returns the same number of items specified on the per page prop" +
+                    "erty (GET)", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
