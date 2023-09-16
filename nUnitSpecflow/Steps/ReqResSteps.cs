@@ -1,9 +1,5 @@
-﻿using Newtonsoft.Json;
-using NUnit.Framework;
-using nUnitSpecflow.DataAccess;
+﻿using NUnit.Framework;
 using nUnitSpecflow.DataAccess.DAO;
-using nUnitSpecflow.DataAccess.DTO;
-using RestSharp;
 using TechTalk.SpecFlow;
 
 namespace nUnitSpecflow.Steps

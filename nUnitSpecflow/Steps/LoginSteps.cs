@@ -24,7 +24,8 @@ namespace nUnitSpecflow.Steps
         }
 
         [Then(@"the inventory page is displayed")]
-        public void ThenTheInventoryPageIsDisplayed() { }
+        [When(@"the inventory page is displayed")]
+        public void TheInventoryPageIsDisplayed() { }
 
         [When(@"user selects ""([^""]*)"" in the filter dropdown")]
         public void WhenUserSelectsInTheFilterDropdown(string filterCriteria)
@@ -39,6 +40,15 @@ namespace nUnitSpecflow.Steps
             WhenUserLoginsWithUsernameAndPassword(
                 SettingsManager.Username,
                 SettingsManager.Password
+            );
+        }
+
+        [Then(@"the ""([^""]*)"" description is displayed")]
+        public void ThenTheDescriptionIsDisplayed(string productName)
+        {
+            Assert.AreEqual(
+                _resourceManager.GetString(productName),
+                ((InventoryPage)CurrentPage).GetItemDescription(productName)
             );
         }
     }

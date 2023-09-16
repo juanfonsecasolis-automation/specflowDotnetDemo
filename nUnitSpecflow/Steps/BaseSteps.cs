@@ -1,10 +1,7 @@
-﻿using nUnitSpecflow.Hooks;
+﻿using nUnitSpecflow.DataAccess.StringResources;
+using nUnitSpecflow.Hooks;
 using nUnitSpecflow.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Resources;
 using TechTalk.SpecFlow;
 
 namespace nUnitSpecflow.Steps
@@ -21,6 +18,7 @@ namespace nUnitSpecflow.Steps
         protected MyDriverManager MyDriverManager;
         private ScenarioContext _scenarioContext;
         public const string UiTestLabel = "uiTest";
+        protected ResourceManager _resourceManager;
 
         protected BasePage CurrentPage
         {
@@ -37,6 +35,7 @@ namespace nUnitSpecflow.Steps
                 );
             }
             _scenarioContext = scenarioContext;
+            _resourceManager = new ResourceManager(typeof(ProductDescriptions));
         }
 
         protected T Get<T>(ContextKeys contextKeys)

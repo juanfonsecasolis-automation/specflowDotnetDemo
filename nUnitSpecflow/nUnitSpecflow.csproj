@@ -33,11 +33,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="DataAccess\StringResources\ProductDescriptions.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProductDescriptions.resx</DependentUpon>
+    </Compile>
     <Compile Update="edge.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>edge.runsettings</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="DataAccess\StringResources\ProductDescriptions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductDescriptions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

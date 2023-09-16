@@ -35,5 +35,14 @@ namespace nUnitSpecflow.Pages
         {
             _filterDropdown.SelectElementByText(filterCriteria);
         }
+
+        internal string GetItemDescription(string productName)
+        {
+            return MyDriverManager
+                .FindElement(
+                    By.XPath($"//div[text()='{productName}']/parent::a/following-sibling::div")
+                )
+                .Text;
+        }
     }
 }
