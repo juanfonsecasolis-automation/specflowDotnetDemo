@@ -2,7 +2,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
-using WebDriverManager.DriverConfigs.Impl;
 
 namespace nUnitSpecflow.Factories
 {
@@ -18,38 +17,31 @@ namespace nUnitSpecflow.Factories
     {
         public static WebDriver GetDriver(WebBrowserType webBrowserType)
         {
-            WebDriver webDriver;
             switch (webBrowserType)
             {
                 case WebBrowserType.Edge:
                     var edgeOptions = new EdgeOptions();
                     if (SettingsManager.HeadlessEnabled)
                         edgeOptions.AddArgument("headless");
-                    new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
-                    webDriver = new EdgeDriver(edgeOptions);
-                    break;
+                    return new EdgeDriver(edgeOptions);
+
                 case WebBrowserType.Chrome:
                     var chromeOptions = new ChromeOptions();
                     if (SettingsManager.HeadlessEnabled)
                         chromeOptions.AddArgument("--headless");
-                    new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
-                    webDriver = new ChromeDriver(chromeOptions);
-                    break;
+                    return new ChromeDriver(chromeOptions);
+
                 case WebBrowserType.ChromeRaspberryPi:
                     var chromeRaspberryPiOptions = new ChromeOptions();
                     chromeRaspberryPiOptions.AddArguments("--no-sandbox");
                     chromeRaspberryPiOptions.AddArguments("--disable-dev-shm-usage");
                     if (SettingsManager.HeadlessEnabled)
                         chromeRaspberryPiOptions.AddArgument("--headless");
-                    webDriver = new ChromeDriver(
-                        "/usr/lib/chromium-browser",
-                        chromeRaspberryPiOptions
-                    ); // run `sudo apt-get install chromium-chromedriver` in the RPi
-                    break;
+                    return new ChromeDriver("/usr/lib/chromium-browser", chromeRaspberryPiOptions); // run `sudo apt-get install chromium-chromedriver` in the RPi
+
                 default:
                     throw new NotSupportedException();
             }
-            return webDriver;
         }
     }
 }
